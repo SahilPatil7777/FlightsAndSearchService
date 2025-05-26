@@ -7,7 +7,7 @@ const setupAndStartServer = async () => {
 
   // Middleware to parse JSON bodies
   app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({ extended: true })); 
 
   app.listen(PORT, () => {
     console.log(`Server is Started at ${PORT}`);
