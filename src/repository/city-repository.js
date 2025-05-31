@@ -1,5 +1,5 @@
 const { City } = require("../models/index");
-const  { Op } = require("sequelize");
+const { Op } = require("sequelize");
 
 class CityRepository {
   async createCity({ name }) {
@@ -25,7 +25,7 @@ class CityRepository {
       throw { error };
     }
   }
- 
+
   async updateCity(cityId, data) {
     try {
       // The below approach also works but will not return updated object
@@ -38,7 +38,7 @@ class CityRepository {
       // for getting updated data in mysql we use the below approach
       const city = await City.findByPk(cityId);
       city.name = data.name;
-      await city.save(); 
+      await city.save();
       return city;
     } catch (error) {
       console.log("Something went wrong in the repository layer");
@@ -54,16 +54,17 @@ class CityRepository {
       console.log("Something went wrong in the repository layer");
       throw { error };
     }
-  } 
+  }
 
-  async getAllCities(filter) {// filter can be empty also
+  async getAllCities(filter) {
+    // filter can be empty also
     try {
       if (filter.name) {
         const cities = await City.findAll({
           where: {
             name: {
               [Op.startsWith]: filter.name,
-            }
+            },
           },
         });
         return cities;
@@ -74,7 +75,7 @@ class CityRepository {
       console.log("Something went wrong in the repository layer");
       throw { error };
     }
-  } 
+  }
 }
 
 module.exports = CityRepository;
